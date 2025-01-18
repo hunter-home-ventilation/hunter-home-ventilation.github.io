@@ -33,7 +33,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Detect package manager
         id: detect-package-manager
-        run: pnpm install --frozen-lockfile
+        run: npm i -g pnpm && pnpm install --frozen-lockfile
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
