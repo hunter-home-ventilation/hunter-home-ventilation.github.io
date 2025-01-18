@@ -3,17 +3,17 @@ import * as Button from './button';
 
 export function Jumbotron() {
   return (
-    <div className="container mx-auto h-[739px] flex flex-col items-center justify-center text-center px-8">
+    <div className="container mx-auto flex h-[739px] flex-col items-center justify-center px-8 text-center">
       <Image
         alt="background"
-        src="/background.png"
+        src="./background.png"
         fill
-        className="absolute max-h-[793px] -z-10 object-cover"
+        className="absolute -z-10 max-h-[793px] object-cover"
       />
 
-      <h1 className="text-5xl font-semibold mb-4 text-primary">Hunter Home Ventilation</h1>
+      <h1 className="text-primary mb-4 text-5xl font-semibold">Hunter Home Ventilation</h1>
 
-      <p className="text-secondary text-base max-w-lg mb-8">
+      <p className="text-secondary mb-8 max-w-lg text-base">
         Low cost whole house ventilation that meets building regulations, saves energy and prevents
         condensation.
       </p>
