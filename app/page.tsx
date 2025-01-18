@@ -1,101 +1,203 @@
-import Image from "next/image";
+import {
+  RiAlertLine,
+  RiDropLine,
+  RiHeartLine,
+  RiHomeSmileLine,
+  RiMailLine,
+  RiPhoneLine,
+} from '@remixicon/react';
+import * as Button from './components/button';
+import * as Chip from './components/chip';
+import * as Contact from './components/contact';
+import * as Feature from './components/feature';
+import * as Footer from './components/footer';
+import * as Form from './components/form';
+import { Jumbotron } from './components/jumbotron';
+import * as Navbar from './components/navbar';
+import * as Pricing from './components/pricing';
+import * as Section from './components/section';
+import * as Testimonial from './components/testimonial';
 
-export default function Home() {
+export default function Index() {
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+    <>
+      <Navbar.Root>
+        <Navbar.Item>Home</Navbar.Item>
+        <Navbar.Item>About</Navbar.Item>
+        <Navbar.Item>Products</Navbar.Item>
+        <Navbar.Item>Contact</Navbar.Item>
+      </Navbar.Root>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+      <Jumbotron />
+
+      <Section.Root>
+        <Section.Label color="lime">Learn more</Section.Label>
+        <Section.Title>About Drimaster</Section.Title>
+        <Section.Description>
+          Improve your home&apos;s air quality with The Drimaster. This advanced system draws in
+          fresh, filtered outdoor air via your roof space, preventing damp and condensation for a
+          cleaner, healthier environment.
+        </Section.Description>
+      </Section.Root>
+
+      <Feature.List>
+        <Feature.Card
+          icon={<RiDropLine />}
+          title="Condensation & Mould"
+          description="Is your home plagued by condensation, mold, dampness, musty odors, fogged windows, damaged decor, or poor air quality? The solution is here: the Drimaster Clean Air Ventilation Unit!"
+        />
+        <Feature.Card
+          icon={<RiHomeSmileLine />}
+          title="Building Regulations"
+          description="BBA regulations require effective home ventilation. The Drimaster System meets all British Board of Agrément standards, eliminating the need for unsightly window trickle vents. Plus, we're CIS registered!"
+        />
+        <Feature.Card
+          icon={<RiHeartLine />}
+          title="Health Benefits"
+          description="Airborne allergens from dust mites often trigger asthma. The Drimaster unit provides gentle background ventilation to reduce these allergens and can be directly enhanced for optimal relief in the asthmatic's bedroom."
+        />
+        <Feature.Card
+          icon={<RiAlertLine />}
+          title="Reduce Radon Levels"
+          description="Radon is a naturally occurring gas from the radioactive decay of underground uranium and is the second leading cause of lung cancer, responsible for up to 60 deaths annually in Northern Ireland. A Drimaster unit can reduce radon levels by up to 90%!"
+        />
+      </Feature.List>
+
+      <Testimonial.Root>
+        <Testimonial.Card
+          avatar="/avatar-1.png"
+          name="Mandy Moore"
+          location="Glengormley"
+          quote="Drimaster is Brilliant! All condensation gone the next day, couldn't believe it! Wish I had done it years ago!"
+        />
+        <Testimonial.Card
+          avatar="/avatar-2.png"
+          name="David Black"
+          location="Belfast"
+          quote="My Drimaster has been fitted less than 24 hours and condensation has completely cleared up. Cannot recommend Hunter Home Ventilation enough."
+        />
+      </Testimonial.Root>
+
+      <div className="bg-secondary-hover pb-20">
+        <Section.Root>
+          <Section.Label color="purple">Pricing</Section.Label>
+          <Section.Title>Available products</Section.Title>
+          <Section.Description>
+            A range of Drimaster products are available to meet your specific needs.
+          </Section.Description>
+        </Section.Root>
+
+        <Pricing.Root>
+          <Pricing.Card
+            product="Dri-ECO Loft Control"
+            description="Drimaster with speed controls in the loft."
+            price={700}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            <Pricing.Feature>BBA Certificated</Pricing.Feature>
+            <Pricing.Feature>5 Year Warranty</Pricing.Feature>
+            <Pricing.Feature>System Controls on Unit</Pricing.Feature>
+            <Pricing.Feature>1p a day running cost</Pricing.Feature>
+            <Pricing.Feature>Price includes installation</Pricing.Feature>
+          </Pricing.Card>
+
+          <Pricing.Card
+            product="Dri-ECO Hall Control"
+            description="Drimaster with speed controls in the hall."
+            price={750}
+            prominent
           >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
+            <Pricing.Feature>BBA Certificated</Pricing.Feature>
+            <Pricing.Feature>Optional 7 Year Warranty*</Pricing.Feature>
+            <Pricing.Feature>Controlled from hallway</Pricing.Feature>
+            <Pricing.Feature>1p a day running cost</Pricing.Feature>
+            <Pricing.Feature>Price includes installation</Pricing.Feature>
+          </Pricing.Card>
+
+          <Pricing.Card
+            product="Dri-HEAT Hall Control"
+            description="Drimaster with heating and speed controls in the hall."
+            price={800}
+          >
+            <Pricing.Feature>BBA Certificated</Pricing.Feature>
+            <Pricing.Feature>Optional 7 Year Warranty*</Pricing.Feature>
+            <Pricing.Feature>Controlled from hallway</Pricing.Feature>
+            <Pricing.Feature>Remote heat control sensors available</Pricing.Feature>
+            <Pricing.Feature>1p a day running cost</Pricing.Feature>
+            <Pricing.Feature>Price includes installation</Pricing.Feature>
+          </Pricing.Card>
+        </Pricing.Root>
+      </div>
+
+      <div className="bg-white flex-col gap-y-16 lg:flex-row py-20 container min-h-[332px] mx-auto flex px-8 gap-x-20">
+        <Contact.Root>
+          <Contact.Label color="lime">Got Questions?</Contact.Label>
+          <Contact.Title>Contact us</Contact.Title>
+          <Contact.Description>
+            We&apos;d love to hear from you! Request a free, no-obligation survey, and we&apos;ll
+            help find the perfect solution for your home. For filter changes, repairs, or any
+            general inquiries, just fill out the form.
+            <br />
+            <br />
+            Our installation services cover Antrim, Down, and Armagh, with supply-only options
+            available across Northern Ireland.
+          </Contact.Description>
+
+          <div className="flex gap-x-2 pt-4">
+            <Chip.Root href="mailto:glenn.hunter@live.co.uk">
+              <Chip.Icon icon={<RiMailLine />} />
+              glenn.hunter@live.co.uk
+            </Chip.Root>
+
+            <Chip.Root href="tel:07828086900">
+              <Chip.Icon icon={<RiPhoneLine />} />
+              078 2808 6900
+            </Chip.Root>
+          </div>
+        </Contact.Root>
+
+        <Form.Root>
+          <Form.Field>
+            <Form.Label isRequired>Name</Form.Label>
+            <Form.Input type="text" placeholder="John Smith" />
+          </Form.Field>
+
+          <Form.Field>
+            <Form.Label>Email address</Form.Label>
+            <Form.Input type="email" placeholder="johnsmith@email.com" />
+          </Form.Field>
+
+          <Form.Field>
+            <Form.Label isRequired>Phone number</Form.Label>
+            <Form.Input type="tel" placeholder="078 2808 6900" />
+          </Form.Field>
+
+          <Form.Field>
+            <Form.Label isRequired>Location</Form.Label>
+            <Form.Input type="text" placeholder="Belfast" />
+          </Form.Field>
+
+          <Form.Field>
+            <Form.Label isRequired>Type</Form.Label>
+            <Form.Select>
+              <option value="survey">Survey request</option>
+              <option value="filter">Filter change</option>
+              <option value="repair">Repair</option>
+              <option value="enquiry">Enquiry</option>
+            </Form.Select>
+          </Form.Field>
+
+          <Form.Field>
+            <Form.Label isRequired>Message</Form.Label>
+            <Form.Textarea placeholder="How can we help you?" />
+          </Form.Field>
+
+          <div className="flex justify-end">
+            <Button.Root variant="primary">Submit</Button.Root>
+          </div>
+        </Form.Root>
+      </div>
+
+      <Footer.Root />
+    </>
   );
 }
