@@ -142,7 +142,7 @@ export default function Index() {
             available across Northern Ireland.
           </Contact.Description>
 
-          <div className="flex gap-x-2 pt-4">
+          <div className="flex flex-wrap gap-2 pt-4">
             <Chip.Root href="mailto:glenn.hunter@live.co.uk">
               <Chip.Icon icon={<RiMailLine />} />
               glenn.hunter@live.co.uk
