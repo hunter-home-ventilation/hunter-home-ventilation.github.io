@@ -65,13 +65,13 @@ export default function Index() {
 
       <Testimonial.Root>
         <Testimonial.Card
-          avatar="/avatar-1.png"
+          avatar="./avatar-1.png"
           name="Mandy Moore"
           location="Glengormley"
           quote="Drimaster is Brilliant! All condensation gone the next day, couldn't believe it! Wish I had done it years ago!"
         />
         <Testimonial.Card
-          avatar="/avatar-2.png"
+          avatar="./avatar-2.png"
           name="David Black"
           location="Belfast"
           quote="My Drimaster has been fitted less than 24 hours and condensation has completely cleared up. Cannot recommend Hunter Home Ventilation enough."
@@ -128,7 +128,7 @@ export default function Index() {
         </Pricing.Root>
       </div>
 
-      <div className="bg-white flex-col gap-y-16 lg:flex-row py-20 container min-h-[332px] mx-auto flex px-8 gap-x-20">
+      <div className="container mx-auto flex min-h-[332px] flex-col gap-x-20 gap-y-16 bg-white px-8 py-20 lg:flex-row">
         <Contact.Root>
           <Contact.Label color="lime">Got Questions?</Contact.Label>
           <Contact.Title>Contact us</Contact.Title>
