@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React from 'react';
 
 interface ListProps {
@@ -20,9 +21,9 @@ interface CardProps {
 
 export function Card({ icon, title, description }: CardProps) {
   return (
-    <div className="border border-light p-10 gap-y-3 flex flex-col -m-[0.5px]">
-      {React.cloneElement(icon, { className: 'size-[22px] text-lime-500' })}
-      <h3 className="text-base font-semibold text-primary">{title}</h3>
+    <div className="border-light -m-[0.5px] flex flex-col gap-y-3 border p-10">
+      {React.cloneElement(icon, { className: 'size-[22px] text-lime-500' } as any)}
+      <h3 className="text-primary text-base font-semibold">{title}</h3>
       <p className="text-secondary text-sm">{description}</p>
     </div>
   );

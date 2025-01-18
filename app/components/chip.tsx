@@ -7,7 +7,7 @@ interface RootProps extends React.ComponentPropsWithoutRef<'a'> {
 export function Root(props: RootProps) {
   return (
     <a
-      className="ps-2.5 pe-3 inline-flex items-center rounded-full font-medium text-sm h-8 shadow-component-inner cursor-pointer transition-colors bg-white text-primary inset-ring inset-ring-alpha-strong hover:bg-secondary-hover active:bg-secondary-active"
+      className="shadow-component-inner text-primary inset-ring-alpha-strong hover:bg-secondary-hover active:bg-secondary-active inline-flex h-8 cursor-pointer items-center rounded-full bg-white ps-2.5 pe-3 text-sm font-medium inset-ring transition-colors"
       {...props}
     />
   );
@@ -18,5 +18,6 @@ interface IconProps {
 }
 
 export function Icon({ icon }: IconProps) {
-  return React.cloneElement(icon, { className: 'size-4 text-secondary mr-2' });
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  return React.cloneElement(icon, { className: 'size-4 text-secondary mr-2' } as any);
 }
