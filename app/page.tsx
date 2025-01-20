@@ -122,7 +122,7 @@ export default function Index() {
           <Pricing.Card
             product="Dri-ECO Loft Control"
             description="Drimaster with speed controls in the loft."
-            price={700}
+            price={600}
           >
             <Pricing.Feature>BBA Certificated</Pricing.Feature>
             <Pricing.Feature>5 Year Warranty</Pricing.Feature>
@@ -134,7 +134,7 @@ export default function Index() {
           <Pricing.Card
             product="Dri-ECO Hall Control"
             description="Drimaster with speed controls in the hall."
-            price={750}
+            price={600}
             prominent
           >
             <Pricing.Feature>BBA Certificated</Pricing.Feature>
@@ -147,7 +147,7 @@ export default function Index() {
           <Pricing.Card
             product="Dri-HEAT Hall Control"
             description="Drimaster with heating and speed controls in the hall."
-            price={800}
+            price={700}
           >
             <Pricing.Feature>BBA Certificated</Pricing.Feature>
             <Pricing.Feature>Optional 7 Year Warranty*</Pricing.Feature>

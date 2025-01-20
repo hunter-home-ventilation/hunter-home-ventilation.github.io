@@ -18,7 +18,7 @@ export function Jumbotron() {
         condensation.
       </p>
 
-      <div className="flex flex-col gap-y-6">
+      <div className="mb-12 flex flex-col gap-y-6 md:mb-0">
         <div className="flex gap-x-2">
           <Button.Root variant="primary">Get a Drimaster</Button.Root>
           <Button.Root variant="secondary">Request survey</Button.Root>
