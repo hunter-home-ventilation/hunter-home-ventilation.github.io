@@ -8,6 +8,7 @@ import {
   RiMailLine,
   RiPhoneLine,
 } from '@remixicon/react';
+import { useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import * as Button from './components/button';
@@ -16,6 +17,7 @@ import * as Contact from './components/contact';
 import * as Feature from './components/feature';
 import * as Footer from './components/footer';
 import * as Form from './components/form';
+import * as InlineTip from './components/inline-tip';
 import { Jumbotron } from './components/jumbotron';
 import * as Navbar from './components/navbar';
 import * as Pricing from './components/pricing';
@@ -42,9 +44,10 @@ export default function Index() {
     resolver: yupResolver(schema),
   });
 
+  const [isSubmitted, setIsSubmitted] = useState(false);
+
   const onSubmit: SubmitHandler<FormState> = (data) => {
-    console.log(data);
-    debugger;
+    setIsSubmitted(true);
   };
 
   return (
@@ -260,6 +263,13 @@ export default function Index() {
               Submit
             </Button.Root>
           </div>
+
+          {isSubmitted && (
+            <InlineTip.Root
+              title="Form submitted"
+              description="Thank you for getting in touch! We will be in touch shortly."
+            />
+          )}
         </Form.Root>
       </div>
 

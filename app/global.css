@@ -135,4 +135,7 @@
 
   --shadow-focus: 0px 0px 0px 1px #1487fa, 0px 0px 0px 4px #cce5ff;
   --shadow-destructive: 0px 0px 0px 1px #ee3a3a, 0px 0px 0px 3px #fed7d7;
+
+  --color-semantic-positive-50: #f3fddd;
+  --color-semantic-positive-500: #84cc15;
 }
