@@ -1,3 +1,5 @@
+'use client';
+import { yupResolver } from '@hookform/resolvers/yup';
 import {
   RiAlertLine,
   RiDropLine,
@@ -6,6 +8,8 @@ import {
   RiMailLine,
   RiPhoneLine,
 } from '@remixicon/react';
+import { SubmitHandler, useForm } from 'react-hook-form';
+import * as yup from 'yup';
 import * as Button from './components/button';
 import * as Chip from './components/chip';
 import * as Contact from './components/contact';
@@ -18,19 +22,43 @@ import * as Pricing from './components/pricing';
 import * as Section from './components/section';
 import * as Testimonial from './components/testimonial';
 
+const schema = yup
+  .object({
+    name: yup.string().required(),
+    email: yup.string().email(),
+    phone: yup.string().required(),
+    town: yup.string().required(),
+    type: yup.string().oneOf(['survey', 'filter', 'repair', 'enquiry']).required(),
+    message: yup.string().required(),
+  })
+  .required();
+
 export default function Index() {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<FormState>({
+    resolver: yupResolver(schema),
+  });
+
+  const onSubmit: SubmitHandler<FormState> = (data) => {
+    console.log(data);
+    debugger;
+  };
+
   return (
     <>
-      <Navbar.Root>
-        <Navbar.Item>Home</Navbar.Item>
-        <Navbar.Item>About</Navbar.Item>
-        <Navbar.Item>Products</Navbar.Item>
-        <Navbar.Item>Contact</Navbar.Item>
+      <Navbar.Root id="home">
+        <Navbar.Item href="#home">Home</Navbar.Item>
+        <Navbar.Item href="#about">About</Navbar.Item>
+        <Navbar.Item href="#products">Products</Navbar.Item>
+        <Navbar.Item href="#contact">Contact</Navbar.Item>
       </Navbar.Root>
 
       <Jumbotron />
 
-      <Section.Root>
+      <Section.Root id="about">
         <Section.Label color="lime">Learn more</Section.Label>
         <Section.Title>About Drimaster</Section.Title>
         <Section.Description>
@@ -79,7 +107,7 @@ export default function Index() {
       </Testimonial.Root>
 
       <div className="bg-secondary-hover pb-20">
-        <Section.Root>
+        <Section.Root id="products">
           <Section.Label color="purple">Pricing</Section.Label>
           <Section.Title>Available products</Section.Title>
           <Section.Description>
@@ -128,7 +156,10 @@ export default function Index() {
         </Pricing.Root>
       </div>
 
-      <div className="container mx-auto flex min-h-[332px] flex-col gap-x-20 gap-y-16 bg-white px-8 py-20 lg:flex-row">
+      <div
+        id="contact"
+        className="container mx-auto flex min-h-[332px] flex-col gap-x-20 gap-y-16 bg-white px-8 py-20 lg:flex-row"
+      >
         <Contact.Root>
           <Contact.Label color="lime">Got Questions?</Contact.Label>
           <Contact.Title>Contact us</Contact.Title>
@@ -155,44 +186,79 @@ export default function Index() {
           </div>
         </Contact.Root>
 
-        <Form.Root>
+        <Form.Root onSubmit={handleSubmit(onSubmit)}>
           <Form.Field>
             <Form.Label isRequired>Name</Form.Label>
-            <Form.Input type="text" placeholder="John Smith" />
+            <Form.Input
+              type="text"
+              placeholder="John Smith"
+              {...register('name', { required: true })}
+              data-error={errors.name ? 'true' : 'false'}
+            />
+            {errors.name && <Form.Error>{errors.name.message}</Form.Error>}
           </Form.Field>
 
           <Form.Field>
             <Form.Label>Email address</Form.Label>
-            <Form.Input type="email" placeholder="johnsmith@email.com" />
+            <Form.Input
+              type="email"
+              placeholder="johnsmith@email.com"
+              {...register('email')}
+              data-error={errors.email ? 'true' : 'false'}
+            />
+            {errors.email && <Form.Error>{errors.email.message}</Form.Error>}
           </Form.Field>
 
           <Form.Field>
             <Form.Label isRequired>Phone number</Form.Label>
-            <Form.Input type="tel" placeholder="078 2808 6900" />
+            <Form.Input
+              type="tel"
+              placeholder="078 2808 6900"
+              {...register('phone', { required: true })}
+              data-error={errors.phone ? 'true' : 'false'}
+            />
+            {errors.phone && <Form.Error>{errors.phone.message}</Form.Error>}
           </Form.Field>
 
           <Form.Field>
-            <Form.Label isRequired>Location</Form.Label>
-            <Form.Input type="text" placeholder="Belfast" />
+            <Form.Label isRequired>Town</Form.Label>
+            <Form.Input
+              type="text"
+              placeholder="Belfast"
+              {...register('town', { required: true })}
+              data-error={errors.town ? 'true' : 'false'}
+            />
+            {errors.town && <Form.Error>{errors.town.message}</Form.Error>}
           </Form.Field>
 
           <Form.Field>
             <Form.Label isRequired>Type</Form.Label>
-            <Form.Select>
+            <Form.Select
+              {...register('type', { required: true })}
+              data-error={errors.type ? 'true' : 'false'}
+            >
               <option value="survey">Survey request</option>
               <option value="filter">Filter change</option>
               <option value="repair">Repair</option>
               <option value="enquiry">Enquiry</option>
             </Form.Select>
+            {errors.type && <Form.Error>{errors.type.message}</Form.Error>}
           </Form.Field>
 
           <Form.Field>
             <Form.Label isRequired>Message</Form.Label>
-            <Form.Textarea placeholder="How can we help you?" />
+            <Form.Textarea
+              placeholder="How can we help you?"
+              {...register('message', { required: true })}
+              data-error={errors.message ? 'true' : 'false'}
+            />
+            {errors.message && <Form.Error>{errors.message.message}</Form.Error>}
           </Form.Field>
 
           <div className="flex justify-end">
-            <Button.Root variant="primary">Submit</Button.Root>
+            <Button.Root type="submit" variant="primary">
+              Submit
+            </Button.Root>
           </div>
         </Form.Root>
       </div>
@@ -200,4 +266,13 @@ export default function Index() {
       <Footer.Root />
     </>
   );
+}
+
+interface FormState {
+  name: string;
+  email?: string;
+  phone: string;
+  town: string;
+  type: 'survey' | 'filter' | 'repair' | 'enquiry';
+  message: string;
 }

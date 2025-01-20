@@ -1,13 +1,13 @@
 import Link from 'next/link';
 
-interface RootProps {
+interface RootProps extends React.ComponentPropsWithoutRef<'nav'> {
   children: React.ReactNode;
 }
 
-export function Root({ children }: RootProps) {
+export function Root({ children, ...props }: RootProps) {
   return (
-    <nav className="h-16 w-full px-8">
-      <div className="container mx-auto h-full flex justify-end items-center gap-x-2">
+    <nav className="h-16 w-full px-8" {...props}>
+      <div className="container mx-auto flex h-full items-center justify-end gap-x-2">
         {children}
       </div>
     </nav>
@@ -15,14 +15,15 @@ export function Root({ children }: RootProps) {
 }
 
 interface ItemProps {
+  href: string;
   children: React.ReactNode;
 }
 
-export function Item({ children }: ItemProps) {
+export function Item({ href, children }: ItemProps) {
   return (
     <Link
-      href="#"
-      className="rounded-md px-4 h-10 inline-flex items-center justify-center text-secondary text-[13px] font-medium hover:bg-ghost-hover active:bg-ghost-active"
+      href={href}
+      className="text-secondary hover:bg-ghost-hover active:bg-ghost-active inline-flex h-10 items-center justify-center rounded-md px-4 text-[13px] font-medium"
     >
       {children}
     </Link>

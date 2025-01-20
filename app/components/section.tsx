@@ -4,9 +4,9 @@ interface RootProps extends React.ComponentPropsWithoutRef<'section'> {
   children: React.ReactNode;
 }
 
-export function Root({ children }: RootProps) {
+export function Root({ children, ...props }: RootProps) {
   return (
-    <section className="container mx-auto flex min-h-[332px] items-center px-8">
+    <section className="container mx-auto flex min-h-[332px] items-center px-8" {...props}>
       <div className="flex w-full flex-col gap-y-4">{children}</div>
     </section>
   );

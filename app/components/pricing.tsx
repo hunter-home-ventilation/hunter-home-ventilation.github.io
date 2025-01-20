@@ -1,17 +1,17 @@
 import { RiCheckFill } from '@remixicon/react';
 import clsx from 'clsx';
 
-interface RootProps {
+interface RootProps extends React.ComponentPropsWithoutRef<'div'> {
   children: React.ReactNode;
 }
 
-export function Root({ children }: RootProps) {
+export function Root({ children, ...props }: RootProps) {
   return (
-    <div className="flex flex-col gap-y-12 px-8">
-      <div className="container mx-auto grid gap-x-8 xl:gap-x-16 gap-y-8 justify-center grid-cols-1 md:grid-cols-2 lg:grid-cols-3">
+    <div className="flex flex-col gap-y-12 px-8" {...props}>
+      <div className="container mx-auto grid grid-cols-1 justify-center gap-x-8 gap-y-8 md:grid-cols-2 lg:grid-cols-3 xl:gap-x-16">
         {children}
       </div>
-      <p className="text-secondary text-xs text-center">
+      <p className="text-secondary text-center text-xs">
         *Unit comes with 5 year warranty, which is extended to 7 years if filters are replaced after
         5 years.
       </p>
@@ -31,17 +31,17 @@ export function Card({ product, description, prominent, price, children }: CardP
   return (
     <div
       className={clsx(
-        'flex flex-col gap-y-4 p-8 ring ring-black/5 rounded-2xl shadow-sm h-[600px] flex-1 items-center',
+        'flex h-[600px] flex-1 flex-col items-center gap-y-4 rounded-2xl p-8 ring shadow-sm ring-black/5',
         {
           'bg-white': !prominent,
           'bg-brand text-white': prominent,
         },
       )}
     >
-      <div className="flex flex-col gap-y-6 flex-1 w-full">
+      <div className="flex w-full flex-1 flex-col gap-y-6">
         <div className="flex flex-col gap-y-2">
           <h3
-            className={clsx('font-semibold text-xl', {
+            className={clsx('text-xl font-semibold', {
               'text-primary': !prominent,
               'text-white': prominent,
             })}
@@ -58,13 +58,13 @@ export function Card({ product, description, prominent, price, children }: CardP
           </p>
         </div>
 
-        <ul className="flex flex-col flex-">{children}</ul>
+        <ul className="flex- flex flex-col">{children}</ul>
       </div>
 
-      <div className="flex flex-col gap-y-6 w-full">
-        <div className="flex gap-x-1 items-baseline">
+      <div className="flex w-full flex-col gap-y-6">
+        <div className="flex items-baseline gap-x-1">
           <p
-            className={clsx('font-semibold text-[40px]', {
+            className={clsx('text-[40px] font-semibold', {
               'text-primary': !prominent,
               'text-white': prominent,
             })}
@@ -95,7 +95,7 @@ interface Feature {
 
 export function Feature({ children }: Feature) {
   return (
-    <li className="h-11 flex gap-x-2 items-center">
+    <li className="flex h-11 items-center gap-x-2">
       <RiCheckFill className="size-5" />
       {children}
     </li>

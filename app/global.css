@@ -132,4 +132,7 @@
 
   --shadow-component-inner: 0px 1px 2px -0.5px rgba(22, 25, 29, 0.04),
     inset 0px -0.5px 0px rgba(22, 25, 29, 0.12);
+
+  --shadow-focus: 0px 0px 0px 1px #1487fa, 0px 0px 0px 4px #cce5ff;
+  --shadow-destructive: 0px 0px 0px 1px #ee3a3a, 0px 0px 0px 3px #fed7d7;
 }

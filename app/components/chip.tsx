@@ -7,7 +7,7 @@ interface RootProps extends React.ComponentPropsWithoutRef<'a'> {
 export function Root(props: RootProps) {
   return (
     <a
-      className="shadow-component-inner text-primary inset-ring-alpha-strong hover:bg-secondary-hover active:bg-secondary-active inline-flex h-8 cursor-pointer items-center rounded-full bg-white ps-2.5 pe-3 text-sm font-medium whitespace-nowrap inset-ring transition-colors"
+      className="shadow-component-inner text-primary inset-ring-alpha-strong hover:bg-secondary-hover active:bg-secondary-active focus:shadow-focus inline-flex h-8 cursor-pointer items-center rounded-full bg-white ps-2.5 pe-3 text-sm font-medium whitespace-nowrap inset-ring transition-colors outline-none focus:inset-ring-0"
       {...props}
     />
   );
