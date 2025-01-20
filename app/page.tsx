@@ -46,7 +46,7 @@ export default function Index() {
 
   const [isSubmitted, setIsSubmitted] = useState(false);
 
-  const onSubmit: SubmitHandler<FormState> = (data) => {
+  const onSubmit: SubmitHandler<FormState> = () => {
     setIsSubmitted(true);
   };
 
