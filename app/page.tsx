@@ -8,7 +8,7 @@ import {
   RiMailLine,
   RiPhoneLine,
 } from '@remixicon/react';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { SubmitHandler, useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import * as Button from './components/button';
@@ -39,15 +39,43 @@ export default function Index() {
   const {
     register,
     handleSubmit,
+    reset,
     formState: { errors },
   } = useForm<FormState>({
     resolver: yupResolver(schema),
   });
 
   const [isSubmitted, setIsSubmitted] = useState(false);
+  const [hasSubmitError, setHasSubmitError] = useState(false);
+  const ref = useRef<HTMLFormElement>(null);
 
-  const onSubmit: SubmitHandler<FormState> = () => {
-    setIsSubmitted(true);
+  const onSubmit: SubmitHandler<FormState> = async () => {
+    if (ref.current === null) return;
+
+    // if there any any errors, don't submit the form
+    if (Object.keys(errors).length) return;
+
+    const data = new FormData(ref.current);
+
+    try {
+      const response = await fetch('https://formspree.io/f/glenn.hunter@live.co.uk', {
+        method: 'POST',
+        body: data,
+        headers: {
+          Accept: 'application/json',
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit form');
+      }
+
+      reset();
+      setIsSubmitted(true);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      setHasSubmitError(true);
+    }
   };
 
   return (
@@ -189,7 +217,7 @@ export default function Index() {
           </div>
         </Contact.Root>
 
-        <Form.Root onSubmit={handleSubmit(onSubmit)}>
+        <Form.Root ref={ref} onSubmit={handleSubmit(onSubmit)}>
           <Form.Field>
             <Form.Label isRequired>Name</Form.Label>
             <Form.Input
@@ -266,8 +294,17 @@ export default function Index() {
 
           {isSubmitted && (
             <InlineTip.Root
+              variant="success"
               title="Form submitted"
               description="Thank you for getting in touch! We will be in touch shortly."
+            />
+          )}
+
+          {hasSubmitError && (
+            <InlineTip.Root
+              variant="error"
+              title="Failed to submit form"
+              description="An error occurred while submitting the form. Please try again."
             />
           )}
         </Form.Root>

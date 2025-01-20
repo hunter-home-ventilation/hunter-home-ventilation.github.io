@@ -1,6 +1,6 @@
 import { RiArrowDownSLine } from '@remixicon/react';
 
-interface RootProps extends React.ComponentPropsWithoutRef<'form'> {
+interface RootProps extends React.ComponentPropsWithRef<'form'> {
   children: React.ReactNode;
 }
 
