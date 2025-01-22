@@ -8,14 +8,14 @@ export function Root(props: RootProps) {
   return <form className="flex flex-1 flex-col gap-y-6" {...props} />;
 }
 
-interface LabelProps {
+interface LabelProps extends React.ComponentPropsWithoutRef<'label'> {
   isRequired?: boolean;
   children: React.ReactNode;
 }
 
-export function Label({ isRequired, children }: LabelProps) {
+export function Label({ isRequired, children, ...props }: LabelProps) {
   return (
-    <label className="text-primary text-[13px] font-medium">
+    <label className="text-primary text-[13px] font-medium" {...props}>
       {children}
       {isRequired && <span className="text-destructive ml-1">*</span>}
     </label>

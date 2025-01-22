@@ -18,7 +18,7 @@ import * as Feature from './components/feature';
 import * as Footer from './components/footer';
 import * as Form from './components/form';
 import * as InlineTip from './components/inline-tip';
-import { Jumbotron } from './components/jumbotron';
+import * as Jumbotron from './components/jumbotron';
 import * as Navbar from './components/navbar';
 import * as Pricing from './components/pricing';
 import * as Section from './components/section';
@@ -30,7 +30,7 @@ const schema = yup
     email: yup.string().email(),
     phone: yup.string().required(),
     town: yup.string().required(),
-    type: yup.string().oneOf(['survey', 'filter', 'repair', 'enquiry']).required(),
+    type: yup.string().oneOf(['survey', 'filter', 'repair', 'enquiry', 'purchase']).required(),
     message: yup.string().required(),
   })
   .required();
@@ -40,6 +40,8 @@ export default function Index() {
     register,
     handleSubmit,
     reset,
+    setFocus,
+    setValue,
     formState: { errors },
   } = useForm<FormState>({
     resolver: yupResolver(schema),
@@ -58,7 +60,7 @@ export default function Index() {
     const data = new FormData(ref.current);
 
     try {
-      const response = await fetch('https://formspree.io/f/glenn.hunter@live.co.uk', {
+      const response = await fetch('https://formspree.io/f/myybvpvq', {
         method: 'POST',
         body: data,
         headers: {
@@ -78,16 +80,38 @@ export default function Index() {
     }
   };
 
+  const purchaseDrimaster = () => {
+    setFocus('name');
+
+    setValue(
+      'message',
+      'Hi, I would like to purchase a Drimaster unit. The unit I would like to purchase is ____.',
+    );
+    setValue('type', 'purchase');
+  };
+
+  const requestSurvey = () => {
+    setFocus('name');
+
+    setValue('message', 'Hi, I would like to request a free survey for my home. My address is:');
+    setValue('type', 'survey');
+  };
+
   return (
     <>
       <Navbar.Root id="home">
-        <Navbar.Item href="#home">Home</Navbar.Item>
         <Navbar.Item href="#about">About</Navbar.Item>
         <Navbar.Item href="#products">Products</Navbar.Item>
         <Navbar.Item href="#contact">Contact</Navbar.Item>
       </Navbar.Root>
 
-      <Jumbotron />
+      <Jumbotron.Root onRequestSurvey={requestSurvey} onGetDrimaster={purchaseDrimaster}>
+        <Jumbotron.Title>Hunter Home Ventilation</Jumbotron.Title>
+        <Jumbotron.Description>
+          Low cost whole house ventilation that meets building regulations, saves energy and
+          prevents condensation.
+        </Jumbotron.Description>
+      </Jumbotron.Root>
 
       <Section.Root id="about">
         <Section.Label color="lime">Learn more</Section.Label>
@@ -219,8 +243,11 @@ export default function Index() {
 
         <Form.Root ref={ref} onSubmit={handleSubmit(onSubmit)}>
           <Form.Field>
-            <Form.Label isRequired>Name</Form.Label>
+            <Form.Label isRequired htmlFor="name">
+              Name
+            </Form.Label>
             <Form.Input
+              id="name"
               type="text"
               placeholder="John Smith"
               {...register('name', { required: true })}
@@ -230,8 +257,9 @@ export default function Index() {
           </Form.Field>
 
           <Form.Field>
-            <Form.Label>Email address</Form.Label>
+            <Form.Label htmlFor="email">Email address</Form.Label>
             <Form.Input
+              id="email"
               type="email"
               placeholder="johnsmith@email.com"
               {...register('email')}
@@ -241,8 +269,11 @@ export default function Index() {
           </Form.Field>
 
           <Form.Field>
-            <Form.Label isRequired>Phone number</Form.Label>
+            <Form.Label isRequired htmlFor="phone">
+              Phone number
+            </Form.Label>
             <Form.Input
+              id="phone"
               type="tel"
               placeholder="078 2808 6900"
               {...register('phone', { required: true })}
@@ -252,8 +283,11 @@ export default function Index() {
           </Form.Field>
 
           <Form.Field>
-            <Form.Label isRequired>Town</Form.Label>
+            <Form.Label isRequired htmlFor="town">
+              Town
+            </Form.Label>
             <Form.Input
+              id="town"
               type="text"
               placeholder="Belfast"
               {...register('town', { required: true })}
@@ -263,8 +297,11 @@ export default function Index() {
           </Form.Field>
 
           <Form.Field>
-            <Form.Label isRequired>Type</Form.Label>
+            <Form.Label isRequired htmlFor="type">
+              Type
+            </Form.Label>
             <Form.Select
+              id="type"
               {...register('type', { required: true })}
               data-error={errors.type ? 'true' : 'false'}
             >
@@ -272,13 +309,17 @@ export default function Index() {
               <option value="filter">Filter change</option>
               <option value="repair">Repair</option>
               <option value="enquiry">Enquiry</option>
+              <option value="purchase">Purchase</option>
             </Form.Select>
             {errors.type && <Form.Error>{errors.type.message}</Form.Error>}
           </Form.Field>
 
           <Form.Field>
-            <Form.Label isRequired>Message</Form.Label>
+            <Form.Label isRequired htmlFor="message">
+              Message
+            </Form.Label>
             <Form.Textarea
+              id="message"
               placeholder="How can we help you?"
               {...register('message', { required: true })}
               data-error={errors.message ? 'true' : 'false'}
@@ -320,6 +361,6 @@ interface FormState {
   email?: string;
   phone: string;
   town: string;
-  type: 'survey' | 'filter' | 'repair' | 'enquiry';
+  type: 'survey' | 'filter' | 'repair' | 'enquiry' | 'purchase';
   message: string;
 }
